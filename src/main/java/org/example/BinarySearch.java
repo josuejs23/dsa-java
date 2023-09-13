@@ -5,7 +5,7 @@ public class BinarySearch {
 
 //        System.out.println(findIndex(new int[]{1,2,3,4}, 5));
 //        System.out.println(findIndex(new int[]{1,2,3,4,12,40}, 4));
-        System.out.println(findIndex(new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}, 100));
+        System.out.println(findIndex(new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}, 15));
     }
 
     private static int findIndex(int[] arr, int target) {
