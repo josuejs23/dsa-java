@@ -4,7 +4,10 @@ public class FindPeakInMountain {
     public static void main(String[] args) {
 //        System.out.println(peakOfMountain(new int[]{0,1,2,4,3,0}));
 //        System.out.println(binarySearch(new int[]{0,1,2,3,4},4));
-        System.out.println(findInMountainArray(new int[]{1,2,3,4,1,0}, 3));
+//        System.out.println(findInMountainArray(new int[]{1,2,3,4,1,0}, 0));
+//        System.out.println(peakOfMountain(new int[]{1,2,3,4}));
+//        System.out.println(findPivot(new int[]{7,8,9,10,1,2,3,4,5,6}));
+        System.out.println(binarySearchRotated(new int[]{7,8,9,10,1,2,3,4,5,6}, 20));
     }
 
     /************************************
@@ -28,7 +31,8 @@ public class FindPeakInMountain {
         }
         // in the end, start == end are pointing to the largest number
         // start and end are always trying to find the max element in the above 2 checks
-        return arr[start];
+        // return arr[start];
+        return start;
     }
 
     static int binarySearch(int[] arr, int target, int start, int end){
@@ -78,8 +82,48 @@ public class FindPeakInMountain {
 
     static int findInMountainArray( int[] arr, int target){
         int maxIndex = peakOfMountain(arr);
-        if(maxIndex != -1 && target < arr[maxIndex] ){
-            return findIndexAgnosticOrder(arr, target, 0, maxIndex);
+        int firstTry = findIndexAgnosticOrder(arr, target, 0, maxIndex);
+        if(firstTry != -1){
+            return firstTry;
+        }
+        return findIndexAgnosticOrder(arr, target, maxIndex, arr.length);
+    }
+
+    static int binarySearchRotated(int [] arr, int target){
+        int pivot = findPivot(arr);
+        if(pivot == -1){
+            return binarySearch(arr,target,0, arr.length -1);
+        }
+        int firstTry = binarySearch(arr, target,0, pivot);
+        if(firstTry == -1){
+            int secondTry = binarySearch(arr, target,pivot+1, arr.length - 1);
+            if (secondTry != -1){
+                return secondTry;
+            }
+        } else {
+            return firstTry;
+        }
+        return -1;
+    }
+    static int findPivot(int[] arr){
+        int start =0;
+        int end = arr.length - 1;
+        int mid = start + (end - start) / 2;
+        while (start <= end){
+
+            if( mid < end && arr[mid] > arr[mid+1] ){
+                return mid;
+            }
+
+            if(mid > start && arr[mid] < arr[mid-1]){
+                return mid - 1;
+            }
+
+            if(arr[mid] <= arr[start]){
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
         }
         return -1;
     }
