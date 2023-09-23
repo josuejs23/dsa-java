@@ -89,6 +89,10 @@ public class FindPeakInMountain {
         return findIndexAgnosticOrder(arr, target, maxIndex, arr.length);
     }
 
+
+    /************************************
+     *  TO STUDY - IMPORTANT SECTION   *
+     ************************************/
     static int binarySearchRotated(int [] arr, int target){
         int pivot = findPivot(arr);
         if(pivot == -1){
